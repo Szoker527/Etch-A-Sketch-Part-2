@@ -3,7 +3,6 @@
 
 const container = document.querySelector(".grid-container");
 
-function newGrid() {
     for (i = 16; i > 0; i--) {
 
         const divBig = document.createElement("div");
@@ -18,6 +17,10 @@ function newGrid() {
 
     }
 
-}
-//div.setAttribute('style', `height: ${size}px; width: ${size}px;`);   
-newGrid()
+const smallDivs =  document.querySelectorAll(".grid-small");
+
+    smallDivs.forEach( function(div) {
+        div.addEventListener("mouseover", (event) => {
+            event.target.style.background = "orange";
+        })
+    })
