@@ -15,7 +15,19 @@ body {
 
   .grid-container {
     display: flex;
-    border: 5px black solid;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 1px black solid;
     width: 400px;
     height: 400px;
+  }
+
+  .grid-big {
+    display: flex;
+    flex: 1;
+  }
+
+  .grid-small {
+    border: 0.5px black solid;
+    flex: 1;
   }
