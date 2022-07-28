@@ -10,10 +10,19 @@
 </head>
 <body>
     <div class="button-panel">
-        <button class="new-grid button-size">New Gird</button>
+        <button id="grid-button" class="grid-new button-size">New Gird</button>
     </div>
     <div class="grid-container">
 
+    </div>
+
+    <div id="myModal" class="modal">
+        <form id="gridForm" class="modal-content" name="grid-form">
+                <span class="close">&times;</span>
+                <label for="input-number">Type new grid number(max 100)</label><br>
+                <input type="text" id="input-number" name="input_value">
+                <button type="button" id="grid-submit">Submit</button>
+        </form>
     </div>
 </body>
 </html>
