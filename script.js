@@ -6,6 +6,7 @@ const span = document.getElementsByClassName("close")[0];
 const gridSubmit = document.getElementById("grid-submit");
 const form = document.forms.gridForm
 let inputValue;
+let x = inputValue;
 
     for (i = 16; i > 0; i--) {
 
@@ -27,6 +28,11 @@ let inputValue;
         })
     })
 
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
 
     gridBtn.onclick = function() {
         modal.style.display = "flex";
@@ -51,5 +57,20 @@ let inputValue;
         inputValue = form.elements.input_value.value;
         console.log(inputValue)
         modal.style.display = "none";
+        removeAllChildNodes(container);
+
+        for (i = 0; i < inputValue; i++) {
+
+            const divBig = document.createElement("div");
+            container.appendChild(divBig);
+            divBig.classList.add("grid-big");
+    
+            for (x = 0; x < inputValue; x++) {
+                const divSmall = document.createElement("div");
+                divBig.appendChild(divSmall);
+                divSmall.classList.add("grid-small");
+            }
+        } 
+           
     })
     
