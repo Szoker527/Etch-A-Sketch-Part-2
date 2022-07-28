@@ -4,6 +4,7 @@ const modal = document.getElementById("myModal");
 const gridBtn = document.getElementById("grid-button");
 const span = document.getElementsByClassName("close")[0];
 const gridSubmit = document.getElementById("grid-submit");
+const numberInput = document.getElementById("input-number");
 const form = document.forms.gridForm
 let inputValue = 16;
 
@@ -21,20 +22,28 @@ function gridDraw(gridAmount) {
         const divBig = document.createElement("div");
         container.appendChild(divBig);
         divBig.classList.add("grid-big");
-    
+        
         for (x = 0; x < gridAmount; x++) {
             const divSmall = document.createElement("div");
             divBig.appendChild(divSmall);
             divSmall.classList.add("grid-small");
-
+            
         }
-
+        
+    }
 }
+
+function gridColor(nodelist) {
+    nodelist.forEach( function(div) {
+        div.addEventListener("mouseover", (event) => {
+            event.target.style.background = "orange";
+        })
+    })
 }
 
-    gridBtn.onclick = function() {
-        modal.style.display = "flex";
-        modal.classList.add("modal-flex");
+gridBtn.onclick = function() {
+    modal.style.display = "flex";
+    modal.classList.add("modal-flex");
       }
 
     span.onclick = function() {
@@ -47,26 +56,22 @@ function gridDraw(gridAmount) {
         }
     }
 
-function colorGrid(nodelist) {
-    nodelist.forEach( function(div) {
-        div.addEventListener("mouseover", (event) => {
-            event.target.style.background = "orange";
-        })
-    })
-}
-
-    gridSubmit.addEventListener("click", function() {
-        inputValue = form.elements.input_value.value;
-        console.log(inputValue)
-        modal.style.display = "none";
-        removeAllChildNodes(container);
-
-        gridDraw(inputValue);
-
-        const newContainerChild = container.childNodes;
-
-        colorGrid(newContainerChild);  
-    })
-
     gridDraw(inputValue);
-    colorGrid(containerChild);   
+    gridColor(containerChild);   
+
+gridSubmit.addEventListener("click", function() {
+    
+        if (numberInput.value < 101 && numberInput.value > 0) {
+            console.log(numberInput.value)
+            modal.style.display = "none";
+            removeAllChildNodes(container);
+            gridDraw(numberInput.value);
+            const newContainerChild = container.childNodes;
+            gridColor(newContainerChild); 
+        }
+        else {
+            console.log("ERROR")
+        }
+ 
+
+})
