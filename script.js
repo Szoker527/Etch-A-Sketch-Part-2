@@ -1,38 +1,36 @@
 const container = document.querySelector(".grid-container");
-const smallDivs =  document.querySelectorAll(".grid-small");
+const containerChild = container.childNodes;
 const modal = document.getElementById("myModal");
 const gridBtn = document.getElementById("grid-button");
 const span = document.getElementsByClassName("close")[0];
 const gridSubmit = document.getElementById("grid-submit");
 const form = document.forms.gridForm
-let inputValue;
-let x = inputValue;
+let inputValue = 16;
 
-    for (i = 16; i > 0; i--) {
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
 
+    }
+
+}
+
+function gridDraw(gridAmount) {
+
+    for (i = 0; i < gridAmount; i++) {
         const divBig = document.createElement("div");
         container.appendChild(divBig);
         divBig.classList.add("grid-big");
-
-        for (x = 16; x > 0; x--) {
+    
+        for (x = 0; x < gridAmount; x++) {
             const divSmall = document.createElement("div");
             divBig.appendChild(divSmall);
             divSmall.classList.add("grid-small");
+
         }
 
-    }
-
-    smallDivs.forEach( function(div) {
-        div.addEventListener("mouseover", (event) => {
-            event.target.style.background = "orange";
-        })
-    })
-
-    function removeAllChildNodes(parent) {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild);
-        }
-    }
+}
+}
 
     gridBtn.onclick = function() {
         modal.style.display = "flex";
@@ -49,9 +47,13 @@ let x = inputValue;
         }
     }
 
-
-
-
+function colorGrid(nodelist) {
+    nodelist.forEach( function(div) {
+        div.addEventListener("mouseover", (event) => {
+            event.target.style.background = "orange";
+        })
+    })
+}
 
     gridSubmit.addEventListener("click", function() {
         inputValue = form.elements.input_value.value;
@@ -59,18 +61,12 @@ let x = inputValue;
         modal.style.display = "none";
         removeAllChildNodes(container);
 
-        for (i = 0; i < inputValue; i++) {
+        gridDraw(inputValue);
 
-            const divBig = document.createElement("div");
-            container.appendChild(divBig);
-            divBig.classList.add("grid-big");
-    
-            for (x = 0; x < inputValue; x++) {
-                const divSmall = document.createElement("div");
-                divBig.appendChild(divSmall);
-                divSmall.classList.add("grid-small");
-            }
-        } 
-           
+        const newContainerChild = container.childNodes;
+
+        colorGrid(newContainerChild);  
     })
-    
+
+    gridDraw(inputValue);
+    colorGrid(containerChild);   
