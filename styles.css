@@ -46,7 +46,7 @@ body {
     color: #FFFFFF;
   }
 
-    .button-panel button:hover {
+    .button-size:hover {
       background-color: #14213D;
       color: #FFFFFF;
     }
@@ -126,22 +126,58 @@ body {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #FFFFFF;
   padding: 20px;
-  border: 1px solid #888;
+  color: #14213D;
+  border: 1px solid #FFFFFF;
+  font-weight: 400;
+  border-radius: 8px;
 }
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: #14213D;
+  position: relative;
   float: right;
   font-size: 28px;
   font-weight: bold;
+  bottom: 25px;
+  left: 10px;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #E5E5E5;
   text-decoration: none;
   cursor: pointer;
+}
+
+input[type="number"] {
+  height: 30px;
+  width: 300px;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+
+}
+
+.modal-button {
+  margin-top: 20px;
+  height: 40px;
+  width: 100px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.modal-text_top {
+  font-size: 1.5rem;
 }
