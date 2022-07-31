@@ -2,6 +2,8 @@ const container = document.querySelector(".grid-container");
 const containerChild = container.childNodes;
 const modal = document.getElementById("myModal");
 const gridBtn = document.getElementById("grid-button");
+const gridRes = document.querySelector(".grid-reset");
+const gridRan = document.querySelector(".grid-random");
 const span = document.getElementsByClassName("close")[0];
 const gridSubmit = document.getElementById("grid-submit");
 const numberInput = document.getElementById("input-number");
@@ -33,10 +35,15 @@ function gridDraw(gridAmount) {
     }
 }
 
-function gridColor(nodelist) {
+const setBg = () => {
+    const randomColors = "#" + Math.floor(Math.random()*16777215).toString(16);
+}
+
+setBg();
+function gridColor(nodelist, color) {
     nodelist.forEach( function(div) {
         div.addEventListener("mouseover", (event) => {
-            event.target.style.background = "orange";
+            console.log(event.target.style.background = `${color}`);
         })
     })
 }
@@ -57,7 +64,7 @@ gridBtn.onclick = function() {
     }
 
     gridDraw(inputValue);
-    gridColor(containerChild);   
+    gridColor(containerChild, setBg);   
 
 gridSubmit.addEventListener("click", function() {
     
@@ -67,11 +74,22 @@ gridSubmit.addEventListener("click", function() {
             removeAllChildNodes(container);
             gridDraw(numberInput.value);
             const newContainerChild = container.childNodes;
-            gridColor(newContainerChild); 
+            gridColor(newContainerChild, setBg); 
         }
         else {
             console.log("ERROR")
         }
- 
+})
 
+gridRes.addEventListener("click", function() {
+    removeAllChildNodes(container);
+    gridDraw(16);
+    const newContainerChild = container.childNodes;
+    gridColor(newContainerChild, setBg); 
+})
+
+
+gridRan.addEventListener("click", function() {
+    const newContainerChild = container.childNodes;
+    gridColor(newContainerChild, setBg); 
 })
