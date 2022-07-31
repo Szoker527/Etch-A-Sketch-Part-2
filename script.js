@@ -1,13 +1,14 @@
 const container = document.querySelector(".grid-container");
-let containerChild = container.childNodes;
 const modal = document.getElementById("myModal");
 const gridBtn = document.getElementById("grid-button");
-const gridRes = document.querySelector(".grid-reset");
-const gridRan = document.querySelector(".grid-random");
+const gridReset = document.querySelector(".grid-reset");
+const gridRandom = document.querySelector(".grid-random");
 const span = document.getElementsByClassName("close")[0];
 const gridSubmit = document.getElementById("grid-submit");
 const numberInput = document.getElementById("input-number");
 const form = document.forms.gridForm
+let containerChild = container.childNodes;
+const colorInput = document.getElementById("color");
 let inputValue = 16;
 
 function removeAllChildNodes(parent) {
@@ -36,18 +37,25 @@ function gridDraw(gridAmount) {
 }
 
 function randomColor() {
-    const randomColors = "#" + Math.floor(Math.random()*16777215).toString(16);
-    gridColor(containerChild, randomColors)
+    containerChild.forEach( function(div) {
+            div.addEventListener("mouseover", (event) => {
+                event.target.style.background = "#" + Math.floor(Math.random()*16777215).toString(16);
+            })
+        })
+
 }
 
-
-
 function gridColor(nodelist, color) {
-    nodelist.forEach( function(div) {
-        div.addEventListener("mouseover", (event) => {
-            event.target.style.background = `${color}`;
+    if (color == "random") {
+        randomColor()
+    }
+    else {
+        nodelist.forEach( function(div) {
+            div.addEventListener("mouseover", (event) => {
+                event.target.style.background = `${color}`;
+            })
         })
-    })
+    }
 }
 
 gridBtn.onclick = function() {
@@ -65,31 +73,34 @@ gridBtn.onclick = function() {
         }
     }
 
-    gridDraw(inputValue);
-    gridColor(containerChild, "black");   
-
 gridSubmit.addEventListener("click", function() {
     inputValue = numberInput.value;
-    console.log(inputValue)
         if (numberInput.value < 101 && numberInput.value > 0) {
-            console.log(numberInput.value)
             modal.style.display = "none";
             removeAllChildNodes(container);
-            gridDraw(numberInput.value);
-            const newContainerChild = container.childNodes;
-            gridColor(newContainerChild, setBg = "black"); 
+            gridDraw(inputValue);
+            gridColor(containerChild, setBg = "black"); 
+            colorInput.value = "#000000"
         }
         else {
             console.log("ERROR")
         }
 })
 
-gridRes.addEventListener("click", function() {
+gridReset.addEventListener("click", function() {
     removeAllChildNodes(container);
     gridDraw(inputValue);
-    const newContainerChild = container.childNodes;
-    gridColor(newContainerChild, setBg = "black"); 
+    gridColor(containerChild, "black"); 
+    colorInput.value = "#000000"
 })
 
 
-gridRan.addEventListener("click", randomColor)
+gridRandom.addEventListener("click", randomColor)
+
+colorInput.addEventListener("change", function() {
+    gridColor(containerChild, this.value)
+})
+
+
+gridDraw(inputValue);
+gridColor(containerChild, "black");  
