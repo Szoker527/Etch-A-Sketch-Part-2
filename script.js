@@ -1,5 +1,5 @@
 const container = document.querySelector(".grid-container");
-const containerChild = container.childNodes;
+let containerChild = container.childNodes;
 const modal = document.getElementById("myModal");
 const gridBtn = document.getElementById("grid-button");
 const gridRes = document.querySelector(".grid-reset");
@@ -19,7 +19,7 @@ function removeAllChildNodes(parent) {
 }
 
 function gridDraw(gridAmount) {
-
+    containerChild = container.childNodes;
     for (i = 0; i < gridAmount; i++) {
         const divBig = document.createElement("div");
         container.appendChild(divBig);
@@ -35,15 +35,17 @@ function gridDraw(gridAmount) {
     }
 }
 
-const setBg = () => {
+function randomColor() {
     const randomColors = "#" + Math.floor(Math.random()*16777215).toString(16);
+    gridColor(containerChild, randomColors)
 }
 
-setBg();
+
+
 function gridColor(nodelist, color) {
     nodelist.forEach( function(div) {
         div.addEventListener("mouseover", (event) => {
-            console.log(event.target.style.background = `${color}`);
+            event.target.style.background = `${color}`;
         })
     })
 }
@@ -64,17 +66,18 @@ gridBtn.onclick = function() {
     }
 
     gridDraw(inputValue);
-    gridColor(containerChild, setBg);   
+    gridColor(containerChild, "black");   
 
 gridSubmit.addEventListener("click", function() {
-    
+    inputValue = numberInput.value;
+    console.log(inputValue)
         if (numberInput.value < 101 && numberInput.value > 0) {
             console.log(numberInput.value)
             modal.style.display = "none";
             removeAllChildNodes(container);
             gridDraw(numberInput.value);
             const newContainerChild = container.childNodes;
-            gridColor(newContainerChild, setBg); 
+            gridColor(newContainerChild, setBg = "black"); 
         }
         else {
             console.log("ERROR")
@@ -83,13 +86,10 @@ gridSubmit.addEventListener("click", function() {
 
 gridRes.addEventListener("click", function() {
     removeAllChildNodes(container);
-    gridDraw(16);
+    gridDraw(inputValue);
     const newContainerChild = container.childNodes;
-    gridColor(newContainerChild, setBg); 
+    gridColor(newContainerChild, setBg = "black"); 
 })
 
 
-gridRan.addEventListener("click", function() {
-    const newContainerChild = container.childNodes;
-    gridColor(newContainerChild, setBg); 
-})
+gridRan.addEventListener("click", randomColor)
