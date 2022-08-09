@@ -93,14 +93,9 @@ body {
       -webkit-user-drag: none;
       -webkit-user-select: none;
       -ms-user-select: none;
-      border: 0.5px black solid;
       flex: 1;
     }
 
-    .grid-small:hover {
-      background-color: blue;
-    }
-  
   .footer-text {
     position: absolute;
     bottom: 0;
