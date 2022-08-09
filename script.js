@@ -25,7 +25,7 @@ function removeAllChildNodes(parent) {
 }
 
 function changeColor(e) {
-    if (mouseMove === true) {
+    if (mouseMove === true || e.type === 'mousedown') {
         if (color === "random") {
             e.target.style.background = "#" + Math.floor(Math.random()*16777215).toString(16);
             }
@@ -48,8 +48,8 @@ function gridDraw(gridAmount) {
             const divSmall = document.createElement("div");
             divBig.appendChild(divSmall);
             divSmall.classList.add("grid-small");
-            divSmall.addEventListener("mousedown", changeColor)
-            divSmall.addEventListener("mouseover", changeColor)
+            divSmall.addEventListener("mouseover", changeColor);
+            divSmall.addEventListener("mousedown", changeColor);
             containerChild = document.querySelectorAll(".grid-small")
         }
     }
@@ -117,7 +117,5 @@ gridSubmit.addEventListener("click", function() {
 })
 
 gridDraw(inputValue);
-window.onmousedown = () => {
-    // gridColor()
-}
+
 
